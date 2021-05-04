@@ -16,7 +16,7 @@ export function TaskList() {
 
   function handleCreateNewTask() {
     if (newTaskTitle.length > 0) {
-      
+
       const newTask = {
         id: Date.now(),
         title: newTaskTitle,
@@ -24,12 +24,17 @@ export function TaskList() {
       }
 
       setTasks([...tasks, newTask])
-      setNewTaskTitle('');
+      setNewTaskTitle('')
     }
   }
 
   function handleToggleTaskCompletion(id: number) {
-    // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
+    setTasks(tasks.map(task => {
+      if (task.id === id){
+        task.isComplete = !task.isComplete
+      }
+      return task
+    }))
   }
 
   function handleRemoveTask(id: number) {
